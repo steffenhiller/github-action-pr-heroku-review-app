@@ -6,7 +6,7 @@ const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN });
 // Run your GitHub Action!
 Toolkit.run(
   async (tools) => {
-    const pr = tools.context.payload.pull_request;
+    const { pull_request: pr, repository } = tools.context.payload;
 
     // Required information
     const event = tools.context.event;
@@ -15,7 +15,7 @@ Toolkit.run(
     const fork = pr.head.repo.fork;
     const pr_number = pr.number;
     const repo_url = pr.head.repo.html_url;
-    const source_url = `${pr.head.repo.html_url}/tarball/${branch}`;
+    const source_url = `https://${process.env.GITHUB_TOKEN}@api.github.com/repos/${repository}/tarball/${branch}`;
 
     let fork_repo_id;
     if (fork) {
@@ -27,7 +27,7 @@ Toolkit.run(
       version,
       fork,
       pr_number,
-      source_url,
+      source_url
     });
 
     let action = tools.context.payload.action;
