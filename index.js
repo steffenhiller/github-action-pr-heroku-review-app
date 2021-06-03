@@ -8,7 +8,11 @@ Toolkit.run(
   async (tools) => {
     const { pull_request: pr, repository } = tools.context.payload;
     
-    console.dir(tools.context, { depth: null })
+    // console.dir(tools.context, { depth: null })
+    
+    const tarball_response = await tools.github.request(`GET https://${process.env.GITHUB_TOKEN}@api.github.com/repos/${repository.full_name}/tarball/${branch}`)
+    
+    onsole.dir(tarball_response, { depth: null })
 
     // Required information
     const event = tools.context.event;
