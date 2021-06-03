@@ -7,6 +7,8 @@ const heroku = new Heroku({ token: process.env.HEROKU_API_TOKEN });
 Toolkit.run(
   async (tools) => {
     const { pull_request: pr, repository } = tools.context.payload;
+    
+    console.dir(tools.context, { depth: null })
 
     // Required information
     const event = tools.context.event;
