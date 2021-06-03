@@ -19,7 +19,7 @@ Toolkit.run(
     const repo_url = pr.head.repo.html_url;
     
     const tarball_response = await tools.github.request(`GET https://${process.env.GITHUB_TOKEN}@api.github.com/repos/${repository.full_name}/tarball/${branch}`)
-    onsole.dir(tarball_response, { depth: null })
+    console.dir(tarball_response, { depth: null })
     
     const source_url = `https://${process.env.GITHUB_TOKEN}@api.github.com/repos/${repository.full_name}/tarball/${branch}`;
 
