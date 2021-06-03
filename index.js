@@ -9,10 +9,6 @@ Toolkit.run(
     const { pull_request: pr, repository } = tools.context.payload;
     
     // console.dir(tools.context, { depth: null })
-    
-    const tarball_response = await tools.github.request(`GET https://${process.env.GITHUB_TOKEN}@api.github.com/repos/${repository.full_name}/tarball/${branch}`)
-    
-    onsole.dir(tarball_response, { depth: null })
 
     // Required information
     const event = tools.context.event;
@@ -21,6 +17,10 @@ Toolkit.run(
     const fork = pr.head.repo.fork;
     const pr_number = pr.number;
     const repo_url = pr.head.repo.html_url;
+    
+    const tarball_response = await tools.github.request(`GET https://${process.env.GITHUB_TOKEN}@api.github.com/repos/${repository.full_name}/tarball/${branch}`)
+    onsole.dir(tarball_response, { depth: null })
+    
     const source_url = `https://${process.env.GITHUB_TOKEN}@api.github.com/repos/${repository.full_name}/tarball/${branch}`;
 
     let fork_repo_id;
